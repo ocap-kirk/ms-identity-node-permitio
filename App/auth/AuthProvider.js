@@ -1,7 +1,9 @@
 const msal = require('@azure/msal-node');
 const axios = require('axios');
+const permit = require('../permit-utils')
 
 const { msalConfig } = require('../authConfig');
+const { token } = require('morgan');
 
 class AuthProvider {
     msalConfig;
@@ -145,6 +147,22 @@ class AuthProvider {
                 req.session.idToken = tokenResponse.idToken;
                 req.session.account = tokenResponse.account;
                 req.session.isAuthenticated = true;
+                console.log("******** ******* *******ID TOKEN ******** ******* *******");
+                console.log(tokenResponse.idTokenClaims);
+
+                /**
+                 * Best practice is to update Permit.io with the syncUser() call to ensure the Authorization Provider
+                 * is up to date with the latest information.
+                 */
+                await permit.api.syncUser({
+                    key: tokenResponse.idTokenClaims.sub,
+                    email: tokenResponse.idTokenClaims.email,
+                    first_name: tokenResponse.idTokenClaims.given_name,
+                    last_name: tokenResponse.idTokenClaims.family_name,
+                    attributes: {
+                      ipaddr: tokenResponse.idTokenClaims.ipaddr
+                    }
+                  });s
 
                 const state = JSON.parse(this.cryptoProvider.base64Decode(req.body.state));
                 res.redirect(state.successRedirect);
