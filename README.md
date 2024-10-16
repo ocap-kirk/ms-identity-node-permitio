@@ -62,6 +62,9 @@ This sample demonstrates the following MSAL Node concepts:
    1. Replace the string `"Enter_the_Graph_Endpoint_Here"` with `"https://graph.microsoft.com/"`
 1. Configure the Express session secret:
    1. Replace the string `"Enter_the_Express_Session_Secret_Here"` with a hard to guess value, such as your client secret.
+1. Configure Permit.io parameters:
+   1. Replace the string `"PERMIT_API_KEY"` with your enviornment api key (the same one you use to start the PDP).
+   1. Replace the string `"PERMIT_PDP_URL"` with your PDP URL (http://localhost:7766).
 1. To start the sample application, run `npm start`.
 1. Finally, open a browser and navigate to [http://localhost:3000](http://localhost:3000).
 

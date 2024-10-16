@@ -1,11 +1,13 @@
 const { Permit } = require("permitio");
+require('dotenv').config({ path: '.env.dev' });
+
 
 const permit = new Permit({
     // your API Key
-    token: "permit_key_OGlobhtyMADeNNCIHVifYR8kRE1zuUL82FnlhY9scGhUHC2BTgGze144SYH3UNsPxveFZmUZlhlaAREFCrPbEj",
+    token: process.env.PERMIT_API_KEY,
   
     // in production, you might need to change this url to fit your deployment
-    pdp: "http://localhost:7766",
+    pdp: process.env.PERMIT_PDP_URL,
   
     // if you want the SDK to emit logs, uncomment this:
     log: {
