@@ -162,7 +162,7 @@ class AuthProvider {
                     attributes: {
                       ipaddr: tokenResponse.idTokenClaims.ipaddr
                     }
-                  });s
+                  });
 
                 const state = JSON.parse(this.cryptoProvider.base64Decode(req.body.state));
                 res.redirect(state.successRedirect);
